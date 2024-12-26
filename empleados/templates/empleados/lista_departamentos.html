@@ -1,7 +1,22 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+
 <h1>Departamentos</h1>
-<ul>
-    {% for departamento in departamentos %}
-    <li>{{ departamento.nombre }}</li>
-    {% endfor %}
-</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for departamento in departamentos %}
+        <tr>
+            <td>{{ departamento.nombre }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <a href="{% url 'agregar_departamentos' %}">Agregar Departamento</a>

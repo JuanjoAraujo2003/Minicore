@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Gasto, Empleado, Departamento
-from .forms import GastoForm, EmpleadoForm, DepartamentoForm
+from .forms import GastoForm, EmpleadoForm, DepartamentoForm, FechaFilterForm
+from django.db.models import Sum, DecimalField
+from django.db.models.functions import Coalesce
 
 # Create your views here.
 
@@ -46,6 +48,38 @@ def agregar_empleado(request):
     else:
         form = EmpleadoForm()
     return render(request, 'empleados/agregar_empleado.html', {'form': form})
+
+
+def gastos_por_departamento(request):
+    form = FechaFilterForm(request.GET or None)
+    resultados = []
+
+    if form.is_valid():
+        fecha_inicio = form.cleaned_data['fecha_inicio']
+        fecha_fin = form.cleaned_data['fecha_fin']
+
+        # Obtener todos los departamentos y calcular sus gastos
+        departamentos = Departamento.objects.all()
+
+        for depto in departamentos:
+            total_gastos = Gasto.objects.filter(
+                empleado__departamento=depto,
+                fecha__gte=fecha_inicio,
+                fecha__lte=fecha_fin
+            ).aggregate(
+                total=Coalesce(Sum('monto'), 0.00,  output_field=DecimalField(max_digits=10, decimal_places=2))
+            )['total']
+
+            resultados.append({
+                'departamento': depto.nombre,
+                'total': total_gastos
+            })
+
+    return render(request, 'empleados/filtrado.html', {
+        'form': form,
+        'resultados': resultados
+    })
+
 
 
 

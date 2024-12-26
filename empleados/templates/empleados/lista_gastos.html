@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Gastos</title>
+
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+
 </head>
 <body>
     <h1>Lista de Gastos</h1>
@@ -37,10 +43,11 @@
     <h2>Opciones</h2>
     <a href="{% url 'agregar_empleado' %}">Agregar Empleado</a> |
     <a href="{% url 'agregar_departamentos' %}">Agregar Departamento</a> |
-    <a href="{% url 'agregar_gasto' %}">Agregar Gasto</a> <!-- Asume que tienes esta URL -->
+    <a href="{% url 'agregar_gasto' %}">Agregar Gasto</a>
 
     <hr>
     <a href="{% url 'lista_empleados' %}">Ver Lista de Empleados</a> |
-    <a href="{% url 'lista_departamentos' %}">Ver Lista de Departamentos</a>
+    <a href="{% url 'lista_departamentos' %}">Ver Lista de Departamentos</a> |
+    <a href="{% url 'gastos_por_departamento' %}">Filtrado de gastos</a>
 </body>
 </html>

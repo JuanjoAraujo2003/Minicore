@@ -16,3 +16,13 @@ class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
         fields = ['nombre', 'departamento']
+
+class FechaFilterForm(forms.Form):
+    fecha_inicio = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        label='Fecha Inicio'
+    )
+    fecha_fin = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        label='Fecha Fin'
+    )

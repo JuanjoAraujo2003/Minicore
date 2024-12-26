@@ -1,7 +1,25 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+
 <h1>Empleados</h1>
-<ul>
-    {% for empleado in empleados %}
-    <li>{{ empleado.nombre }} - {{ empleado.departamento.nombre }}</li>
-    {% endfor %}
-</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Departamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.departamento.nombre }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 <a href="{% url 'agregar_empleado' %}">Agregar Empleado</a>
