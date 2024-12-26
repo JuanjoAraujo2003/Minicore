@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gastos</title>
+</head>
+<body>
+    <h1>Lista de Gastos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Monto</th>
+                <th>Empleado</th>
+                <th>Departamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gasto in gastos %}
+            <tr>
+                <td>{{ gasto.id }}</td>
+                <td>{{ gasto.fecha }}</td>
+                <td>{{ gasto.descripcion }}</td>
+                <td>{{ gasto.monto }}</td>
+                <td>{{ gasto.empleado.nombre }}</td>
+                <td>{{ gasto.departamento.nombre }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <!-- Opciones para agregar empleados y departamentos -->
+    <h2>Opciones</h2>
+    <a href="{% url 'agregar_empleado' %}">Agregar Empleado</a> |
+    <a href="{% url 'agregar_departamentos' %}">Agregar Departamento</a> |
+    <a href="{% url 'agregar_gasto' %}">Agregar Gasto</a> <!-- Asume que tienes esta URL -->
+
+    <hr>
+    <a href="{% url 'lista_empleados' %}">Ver Lista de Empleados</a> |
+    <a href="{% url 'lista_departamentos' %}">Ver Lista de Departamentos</a>
+</body>
+</html>

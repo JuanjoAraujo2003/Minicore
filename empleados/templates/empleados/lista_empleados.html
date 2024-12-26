@@ -1,0 +1,7 @@
+<h1>Empleados</h1>
+<ul>
+    {% for empleado in empleados %}
+    <li>{{ empleado.nombre }} - {{ empleado.departamento.nombre }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'agregar_empleado' %}">Agregar Empleado</a>

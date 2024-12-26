@@ -1,0 +1,7 @@
+<h1>Departamentos</h1>
+<ul>
+    {% for departamento in departamentos %}
+    <li>{{ departamento.nombre }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'agregar_departamentos' %}">Agregar Departamento</a>
