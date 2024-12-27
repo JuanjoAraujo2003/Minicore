@@ -22,6 +22,7 @@
                 <th>Monto</th>
                 <th>Empleado</th>
                 <th>Departamento</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,11 @@
                 <td>{{ gasto.monto }}</td>
                 <td>{{ gasto.empleado.nombre }}</td>
                 <td>{{ gasto.departamento.nombre }}</td>
+                <td>
+                    <a href="{% url 'eliminar_gasto' gasto.id %}" onclick="return confirm('Esta seguro de eliminar el gasto?;')">
+                        Eliminar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

@@ -26,3 +26,4 @@ class FechaFilterForm(forms.Form):
         widget=forms.DateInput(attrs={'type': 'date'}),
         label='Fecha Fin'
     )
+

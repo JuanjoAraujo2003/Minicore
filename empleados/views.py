@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Gasto, Empleado, Departamento
 from .forms import GastoForm, EmpleadoForm, DepartamentoForm, FechaFilterForm
 from django.db.models import Sum, DecimalField
@@ -58,7 +58,7 @@ def gastos_por_departamento(request):
         fecha_inicio = form.cleaned_data['fecha_inicio']
         fecha_fin = form.cleaned_data['fecha_fin']
 
-        # Obtener todos los departamentos y calcular sus gastos
+
         departamentos = Departamento.objects.all()
 
         for depto in departamentos:
@@ -79,6 +79,30 @@ def gastos_por_departamento(request):
         'form': form,
         'resultados': resultados
     })
+
+def eliminar_gasto(request, gasto_id):
+    gasto = get_object_or_404(Gasto, id=gasto_id)
+    gasto.delete()
+    return redirect('lista_gastos')
+
+def eliminar_empleado(request, empleado_id):
+    empleado = get_object_or_404(Empleado, id=empleado_id)
+    empleado.delete()
+    return redirect('lista_empleados')
+
+
+def editar_empleado(request, empleado_id):
+    empleado = get_object_or_404(Empleado, id=empleado_id)
+
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST, instance=empleado)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_empleados')
+    else:
+        form = EmpleadoForm(instance=empleado)
+
+    return render(request, 'empleados/editar_empleado.html', {'form': form, 'empleado': empleado})
 
 
 
